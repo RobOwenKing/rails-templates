@@ -8,16 +8,18 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
     gem "devise"
     # Automatically add vendor prefixes to CSS rules (https://github.com/ai/autoprefixer-rails)
     gem "autoprefixer-rails"
-    # (https://github.com/FortAwesome/font-awesome-sass)
-    gem "font-awesome-sass", "~> 6.1"
     # Make forms easier (https://github.com/heartcombo/simple_form)
     gem "simple_form", github: "heartcombo/simple_form"
+    
+    # Icons (https://github.com/FortAwesome/font-awesome-sass)
+    # gem "font-awesome-sass", "~> 6.1"
   RUBY
 end
 
 inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mingw ]' do
 <<-RUBY
 
+  # Load environment variables from .env into ENV in development (https://github.com/bkeepers/dotenv)
   gem "dotenv-rails"
 RUBY
 end
