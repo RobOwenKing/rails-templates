@@ -4,9 +4,13 @@ run "if uname | grep -q 'Darwin'; then pgrep spring | xargs kill -9; fi"
 ########################################
 inject_into_file "Gemfile", before: "group :development, :test do" do
   <<~RUBY
+    # For user accounts and authentication (https://github.com/heartcombo/devise)
     gem "devise"
+    # Automatically add vendor prefixes to CSS rules (https://github.com/ai/autoprefixer-rails)
     gem "autoprefixer-rails"
+    # (https://github.com/FortAwesome/font-awesome-sass)
     gem "font-awesome-sass", "~> 6.1"
+    # Make forms easier (https://github.com/heartcombo/simple_form)
     gem "simple_form", github: "heartcombo/simple_form"
   RUBY
 end
