@@ -85,7 +85,7 @@ after_bundle do
   # Generators: db + simple form + pages controller
   ########################################
   rails_command "db:drop db:create db:migrate"
-  generate("simple_form:install", "--bootstrap")
+  generate("simple_form:install")
   generate(:controller, "pages", "home", "--skip-routes", "--no-test-framework")
 
   # Routes
@@ -134,7 +134,7 @@ after_bundle do
     <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
   HTML
   button_to = <<~HTML
-    <div class="d-flex align-items-center">
+    <div>
       <div>Unhappy?</div>
       <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-link" %>
     </div>
