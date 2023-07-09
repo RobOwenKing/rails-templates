@@ -103,12 +103,7 @@ after_bundle do
 
   # Application controller
   ########################################
-  run "rm app/controllers/application_controller.rb"
-  file "app/controllers/application_controller.rb", <<~RUBY
-    class ApplicationController < ActionController::Base
-      before_action :authenticate_user!
-    end
-  RUBY
+  overwrite_application_controller
 
   # migrate + devise views
   ########################################
@@ -152,6 +147,15 @@ def setup_gitignore
     *.swp
     .DS_Store
   TXT
+end
+
+def overwrite_application_controller
+  run "rm app/controllers/application_controller.rb"
+  file "app/controllers/application_controller.rb", <<~RUBY
+    class ApplicationController < ActionController::Base
+      before_action :authenticate_user!
+    end
+  RUBY
 end
 
 def generate_devise_views
