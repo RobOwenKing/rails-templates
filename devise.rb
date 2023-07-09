@@ -62,7 +62,7 @@ end
 # README
 ########################################
 markdown_file_content = <<~MARKDOWN
-  Rails app generated with [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
+  Rails app generated with a [template](https://github.com/RobOwenKing/rails-templates) by [RobOwenKing](http://robowenking.com/) based on [lewagon/rails-templates](https://github.com/lewagon/rails-templates), created by the [Le Wagon coding bootcamp](https://www.lewagon.com) team.
 MARKDOWN
 file "README.md", markdown_file_content, force: true
 
