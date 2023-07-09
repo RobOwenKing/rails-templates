@@ -119,27 +119,7 @@ after_bundle do
   # migrate + devise views
   ########################################
   rails_command "db:migrate"
-  generate("devise:views")
-  gsub_file(
-    "app/views/devise/registrations/new.html.erb",
-    "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>",
-    "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>"
-  )
-  gsub_file(
-    "app/views/devise/sessions/new.html.erb",
-    "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>",
-    "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>"
-  )
-  link_to = <<~HTML
-    <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-  HTML
-  button_to = <<~HTML
-    <div>
-      <div>Unhappy?</div>
-      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-link" %>
-    </div>
-  HTML
-  gsub_file("app/views/devise/registrations/edit.html.erb", link_to, button_to)
+  generate_devise_views
 
   # Pages Controller
   ########################################
@@ -176,4 +156,28 @@ after_bundle do
   git :init
   git add: "."
   git commit: "-m 'feat: Basic Rails app setup using template at https://github.com/RobOwenKing/rails-templates'"
+end
+
+def generate_devise_views
+  generate("devise:views")
+  gsub_file(
+    "app/views/devise/registrations/new.html.erb",
+    "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>",
+    "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>"
+  )
+  gsub_file(
+    "app/views/devise/sessions/new.html.erb",
+    "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>",
+    "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>"
+  )
+  link_to = <<~HTML
+    <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+  HTML
+  button_to = <<~HTML
+    <div>
+      <div>Unhappy?</div>
+      <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn btn-link" %>
+    </div>
+  HTML
+  gsub_file("app/views/devise/registrations/edit.html.erb", link_to, button_to)
 end
