@@ -94,13 +94,7 @@ after_bundle do
 
   # Gitignore
   ########################################
-  append_file ".gitignore", <<~TXT
-    # Ignore .env file containing credentials.
-    .env*
-    # Ignore Mac and Linux file system files
-    *.swp
-    .DS_Store
-  TXT
+  setup_gitignore
 
   # Devise install + user
   ########################################
@@ -148,6 +142,16 @@ after_bundle do
   git :init
   git add: "."
   git commit: "-m 'feat: Basic Rails app setup using template at https://github.com/RobOwenKing/rails-templates'"
+end
+
+def setup_gitignore
+  append_file ".gitignore", <<~TXT
+    # Ignore .env file containing credentials.
+    .env*
+    # Ignore Mac and Linux file system files
+    *.swp
+    .DS_Store
+  TXT
 end
 
 def generate_devise_views
