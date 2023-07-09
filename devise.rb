@@ -38,16 +38,16 @@ end
 ########################################
 file "app/views/shared/_flashes.html.erb", <<~HTML
   <% if notice %>
-    <div class="alert alert-info alert-dismissible fade show m-1" role="alert">
+    <div role="alert">
       <%= notice %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <button type="button" aria-label="Close">
       </button>
     </div>
   <% end %>
   <% if alert %>
-    <div class="alert alert-warning alert-dismissible fade show m-1" role="alert">
+    <div role="alert">
       <%= alert %>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+      <button type="button" aria-label="Close">
       </button>
     </div>
   <% end %>
