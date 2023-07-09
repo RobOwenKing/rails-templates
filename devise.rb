@@ -160,16 +160,28 @@ end
 
 def generate_devise_views
   generate("devise:views")
+  gsub_devise_new_registration
+  gsub_devise_new_session
+  gsub_devise_edit_registration
+end
+
+def gsub_devise_new_registration
   gsub_file(
     "app/views/devise/registrations/new.html.erb",
     "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>",
     "<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>"
   )
+end
+
+def gsub_devise_new_session
   gsub_file(
     "app/views/devise/sessions/new.html.erb",
     "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>",
     "<%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>"
   )
+end
+
+def gsub_devise_edit_registration
   link_to = <<~HTML
     <p>Unhappy? <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
   HTML
