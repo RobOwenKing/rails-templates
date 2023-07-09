@@ -123,15 +123,7 @@ after_bundle do
 
   # Pages Controller
   ########################################
-  run "rm app/controllers/pages_controller.rb"
-  file "app/controllers/pages_controller.rb", <<~RUBY
-    class PagesController < ApplicationController
-      skip_before_action :authenticate_user!, only: [ :home ]
-
-      def home
-      end
-    end
-  RUBY
+  overwrite_pages_controller
 
   # Environments
   ########################################
@@ -180,4 +172,16 @@ def generate_devise_views
     </div>
   HTML
   gsub_file("app/views/devise/registrations/edit.html.erb", link_to, button_to)
+end
+
+def overwrite_pages_controller
+  run "rm app/controllers/pages_controller.rb"
+  file "app/controllers/pages_controller.rb", <<~RUBY
+    class PagesController < ApplicationController
+      skip_before_action :authenticate_user!, only: [ :home ]
+
+      def home
+      end
+    end
+  RUBY
 end
