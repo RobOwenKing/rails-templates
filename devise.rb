@@ -10,18 +10,18 @@ inject_into_file "Gemfile", before: "group :development, :test do" do
     gem "autoprefixer-rails"
     # Make forms easier (https://github.com/heartcombo/simple_form)
     gem "simple_form", github: "heartcombo/simple_form"
-    
+
     # Icons (https://github.com/FortAwesome/font-awesome-sass)
     # gem "font-awesome-sass", "~> 6.1"
   RUBY
 end
 
 inject_into_file "Gemfile", after: 'gem "debug", platforms: %i[ mri mingw x64_mingw ]' do
-<<-RUBY
+  <<-RUBY
 
   # Load environment variables from .env into ENV in development (https://github.com/bkeepers/dotenv)
   gem "dotenv-rails"
-RUBY
+  RUBY
 end
 
 gsub_file("Gemfile", '# gem "sassc-rails"', 'gem "sassc-rails"')
@@ -156,7 +156,8 @@ after_bundle do
   # Environments
   ########################################
   environment 'config.action_mailer.default_url_options = { host: "http://localhost:3000" }', env: "development"
-  environment 'config.action_mailer.default_url_options = { host: "http://TODO_PUT_YOUR_DOMAIN_HERE" }', env: "production"
+  environment 'config.action_mailer.default_url_options = { host: "http://TODO_PUT_YOUR_DOMAIN_HERE" }',
+              env: "production"
 
   # Heroku
   ########################################
